@@ -1,0 +1,23 @@
+package com.andersonmesq.identifyservice.usertenant.controller;
+
+import com.andersonmesq.identifyservice.usertenant.dto.CreateUserTenantRequest;
+import com.andersonmesq.identifyservice.usertenant.dto.UserTenantResponse;
+import com.andersonmesq.identifyservice.usertenant.service.UserTenantService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1/user-tenants")
+@RequiredArgsConstructor
+@PreAuthorize("hasRole('SUPER_ADMIN')")
+public class UserTenantController {
+    private final UserTenantService service;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserTenantResponse create(@RequestBody CreateUserTenantRequest request){
+        return service.create(request);
+    }
+}
