@@ -1,7 +1,6 @@
 package com.andersonmesq.identifyservice.admin.service;
 
 import com.andersonmesq.identifyservice.admin.dto.CreateUserRequest;
-import com.andersonmesq.identifyservice.admin.exception.UserEmailAlreadyExistException;
 import com.andersonmesq.identifyservice.admin.exception.UserNameAlreadyExistException;
 import com.andersonmesq.identifyservice.admin.mapper.AdminUserMapper;
 import com.andersonmesq.identifyservice.user.dto.UpdateUserRequest;
@@ -9,6 +8,7 @@ import com.andersonmesq.identifyservice.user.dto.UserResponse;
 import com.andersonmesq.identifyservice.user.exception.UserAlreadyActiveException;
 import com.andersonmesq.identifyservice.user.exception.UserAlreadyDeactivatedException;
 import com.andersonmesq.identifyservice.user.exception.UserNotFoundException;
+import com.andersonmesq.identifyservice.user.exception.UserWithoutUserAndEmailException;
 import com.andersonmesq.identifyservice.user.model.User;
 import com.andersonmesq.identifyservice.user.repository.UserRepository;
 import com.andersonmesq.identifyservice.user.systemrole.SystemRole;
@@ -51,17 +51,16 @@ public class AdminUserService {
 
     @Transactional
     public UserResponse create(@Valid CreateUserRequest request){
-        if (repository.existsByEmail(request.email().toLowerCase())) throw new UserEmailAlreadyExistException("Email already exist");
         if (repository.existsByUserName(request.userName())) throw new UserNameAlreadyExistException("User already exist");
         User user = User.builder()
                 .fullName(request.fullName())
                 .userName(request.userName())
-                .email(request.email().toLowerCase())
                 .password(passwordEncoder.encode(request.password()))
                 .systemRole(SystemRole.USER)
                 .enabled(true)
                 .build();
         repository.save(user);
+        if (user.getUserName() == null && user.getEmail() == null) throw new UserWithoutUserAndEmailException("User must have at least a username or an email");
         return mapper.toResponse(user);
     }
 

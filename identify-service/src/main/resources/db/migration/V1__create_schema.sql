@@ -5,7 +5,7 @@ create table tenants (
                          id uuid not null,
                          name varchar(255) not null,
                          slug varchar(255) not null,
-                         status varchar(255) not null,
+                         status varchar(20) not null,
 
                          created_at timestamp(6) not null,
                          updated_at timestamp(6) not null,
@@ -25,7 +25,7 @@ create table users (
                        user_name varchar(255),
                        email varchar(255),
                        password varchar(255) not null,
-                       system_role varchar(255) not null,
+                       system_role varchar(20) not null,
                        enabled boolean not null,
 
                        created_at timestamp(6) not null,
@@ -45,7 +45,7 @@ create table user_tenants (
                               id uuid not null,
                               user_id uuid not null,
                               tenant_id uuid not null,
-                              role varchar(255) not null,
+                              role varchar(20) not null,
                               enabled boolean not null,
 
                               created_at timestamp(6) not null,
@@ -71,11 +71,5 @@ create table user_tenants (
 -- ============================================
 -- INDEXES
 -- ============================================
-create index idx_customers_tenant_id
-    on customers (tenant_id);
-
 create index idx_user_tenants_tenant_id
     on user_tenants (tenant_id);
-
-create index idx_service_order_assignment_service_order_id
-    on service_order_assignment (service_order_id);

@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public record CreateUserTenantRequest(
         UUID userId,
-        UUID tenantId,
-        Role role
+        UUID tenantId
 ) {
 }

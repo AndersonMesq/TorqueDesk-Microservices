@@ -6,6 +6,7 @@ import com.andersonmesq.identifyservice.admin.service.TenantProvisioningService;
 import com.andersonmesq.identifyservice.tenant.dto.CreateTenantRequest;
 import com.andersonmesq.identifyservice.tenant.dto.TenantResponse;
 import com.andersonmesq.identifyservice.tenant.dto.UpdateTenantRequest;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
+@Tag(name = "Admin Tenant Endpoint")
 @RequestMapping("/api/v1/admin/tenants")
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('SUPER_ADMIN')")

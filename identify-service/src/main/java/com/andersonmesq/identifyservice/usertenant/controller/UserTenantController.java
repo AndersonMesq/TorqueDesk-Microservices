@@ -17,7 +17,19 @@ public class UserTenantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserTenantResponse create(@RequestBody CreateUserTenantRequest request){
-        return service.create(request);
+    public UserTenantResponse createOwner(@RequestBody CreateUserTenantRequest request){
+        return service.createOwner(request);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserTenantResponse createAttendant(@RequestBody CreateUserTenantRequest request){
+        return service.createAttendant(request);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserTenantResponse createMechanic(@RequestBody CreateUserTenantRequest request){
+        return service.createMechanic(request);
     }
 }

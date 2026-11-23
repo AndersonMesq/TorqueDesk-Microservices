@@ -4,6 +4,7 @@ import com.andersonmesq.identifyservice.admin.dto.CreateUserRequest;
 import com.andersonmesq.identifyservice.admin.service.AdminUserService;
 import com.andersonmesq.identifyservice.user.dto.UpdateUserRequest;
 import com.andersonmesq.identifyservice.user.dto.UserResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
+@Tag(name = "Admin User Endpoint")
 @RequestMapping("/api/v1/admin/users")
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('SUPER_ADMIN')")

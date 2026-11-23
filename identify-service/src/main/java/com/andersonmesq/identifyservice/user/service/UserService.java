@@ -4,7 +4,7 @@ import com.andersonmesq.identifyservice.security.context.SecurityUtils;
 import com.andersonmesq.identifyservice.user.dto.ChangePasswordRequest;
 import com.andersonmesq.identifyservice.user.dto.UpdateUserRequest;
 import com.andersonmesq.identifyservice.user.dto.UserResponse;
-import com.andersonmesq.identifyservice.user.exception.InvalidPasswordException;
+import com.andersonmesq.identifyservice.user.exception.SamePasswordException;
 import com.andersonmesq.identifyservice.user.exception.UserNotFoundException;
 import com.andersonmesq.identifyservice.user.mapper.UserMapper;
 import com.andersonmesq.identifyservice.user.model.User;
@@ -45,7 +45,7 @@ public class UserService {
     public void changePassword(ChangePasswordRequest request) {
         User user = getCurrentUser();
         if(!passwordEncoder.matches(request.currentPassword(), user.getPassword())) {
-            throw new InvalidPasswordException("Current password invalid");
+            throw new SamePasswordException("New password is equal current password");
         }
         user.setPassword(passwordEncoder.encode(request.newPassword()));
     }

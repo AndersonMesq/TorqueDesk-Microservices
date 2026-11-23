@@ -1,6 +1,6 @@
 package com.andersonmesq.identifyservice.authentication.dto.response;
 
-import com.andersonmesq.identifyservice.usertenant.role.Role;
+import com.andersonmesq.TorqueDesk.usertenant.role.Role;
 
 import java.util.UUID;
 

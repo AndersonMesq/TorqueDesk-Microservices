@@ -10,7 +10,5 @@ public record CreateTenantRequest(
         String ownerName,
         @NotBlank
         @Email
-        String ownerEmail,
-        @NotBlank
-        String ownerPassword
+        String ownerEmail
 ) {}
